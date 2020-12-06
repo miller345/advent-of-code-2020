@@ -1,4 +1,4 @@
-console.log("Day 4");
+import { AOCSolver } from "../aoc.ts";
 
 type Passport = { [key: string]: string };
 
@@ -59,12 +59,11 @@ export const isValidV2 = (p: Passport) => {
   return true;
 };
 
-// const input = await Deno.readTextFile("./04/example.txt");
-const input = await Deno.readTextFile("./04/input.txt");
-const lines = parse(input);
-const part1 = lines.map(isValid).reduce((t, b) => t + (b ? 1 : 0), 0);
-const part2 = lines.map(isValidV2).reduce((t, b) => t + (b ? 1 : 0), 0);
-console.log("Part 1:", part1); // 202
-console.log("Part 2:", part2); // 137
+const solve: AOCSolver = (input) => {
+  const lines = parse(input);
+  const part1 = lines.map(isValid).reduce((t, b) => t + (b ? 1 : 0), 0);
+  const part2 = lines.map(isValidV2).reduce((t, b) => t + (b ? 1 : 0), 0);
+  return { part1, part2 };
+};
 
-export {};
+export default solve;

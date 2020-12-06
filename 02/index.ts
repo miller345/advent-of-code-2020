@@ -1,7 +1,4 @@
-console.log("Day 2");
-
-// const input = await Deno.readTextFile("./02/example.txt");
-const input = await Deno.readTextFile("./02/input.txt");
+import { AOCSolver } from "../aoc.ts";
 
 interface Line {
   x: number;
@@ -9,16 +6,6 @@ interface Line {
   char: string;
   password: string;
 }
-
-const regex = /^(?<x>\d+)-(?<y>\d+) (?<char>\S): (?<password>\S+)$/gm;
-
-let lines = [...input.matchAll(regex)].map((
-  match,
-) => ({
-  ...match.groups,
-  x: Number(match.groups?.x),
-  y: Number(match.groups?.y),
-} as Line));
 
 const validate = (line: Line) => {
   let regex = new RegExp(line.char, "g");
@@ -35,8 +22,19 @@ const validateV2 = (line: Line) => {
 const trueCount = (bools: boolean[]) =>
   bools.reduce((total, valid) => valid ? total + 1 : total, 0);
 
-console.log("Part 1:", trueCount(lines.map(validate))); // 569
+const solve: AOCSolver = (input) => {
+  const regex = /^(?<x>\d+)-(?<y>\d+) (?<char>\S): (?<password>\S+)$/gm;
+  const lines = [...input.matchAll(regex)].map((
+    match,
+  ) => ({
+    ...match.groups,
+    x: Number(match.groups?.x),
+    y: Number(match.groups?.y),
+  } as Line));
+  return {
+    part1: trueCount(lines.map(validate)),
+    part2: trueCount(lines.map(validateV2)),
+  };
+};
 
-console.log("Part 2:", trueCount(lines.map(validateV2))); // 346
-
-export {};
+export default solve;

@@ -14,5 +14,3 @@ Deno.test("getSeatId", () => {
 Deno.test("getSeatId", () => {
   assertEquals(getSeatId("BBFFBBFRLL"), 820);
 });
-
-export {};

@@ -1,4 +1,4 @@
-console.log("Day 3");
+import { AOCSolver } from "../aoc.ts";
 
 type MapValue = "." | "#";
 
@@ -33,22 +33,19 @@ const getTreeCount = (mapTile: MapTile, translation: Coord): number => {
   return treeCount;
 };
 
-// const input = await Deno.readTextFile("./03/example.txt");
-const input = await Deno.readTextFile("./03/input.txt");
-const mapTile = input.split("\n").map((x) => x.split("")) as MapTile;
+const solve: AOCSolver = (input) => {
+  const mapTile = input.split("\n").map((x) => x.split("")) as MapTile;
+  const results = [
+    getTreeCount(mapTile, { x: 1, y: 1 }),
+    getTreeCount(mapTile, { x: 3, y: 1 }),
+    getTreeCount(mapTile, { x: 5, y: 1 }),
+    getTreeCount(mapTile, { x: 7, y: 1 }),
+    getTreeCount(mapTile, { x: 1, y: 2 }),
+  ];
+  return {
+    part1: results[1],
+    part2: results.reduce((total, v) => total * v, 1),
+  };
+};
 
-let results = [
-  getTreeCount(mapTile, { x: 1, y: 1 }),
-  getTreeCount(mapTile, { x: 3, y: 1 }),
-  getTreeCount(mapTile, { x: 5, y: 1 }),
-  getTreeCount(mapTile, { x: 7, y: 1 }),
-  getTreeCount(mapTile, { x: 1, y: 2 }),
-];
-
-let part1 = results[1];
-let part2 = results.reduce((total, v) => total * v, 1);
-
-console.log("Part 1:", part1); // 225
-console.log("Part 2:", part2); // 1115775000
-
-export {};
+export default solve;

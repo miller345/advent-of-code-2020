@@ -13,5 +13,3 @@ Deno.test("getUniqueCharCount", () => {
 Deno.test("getUniqueCharCount", () => {
   assertEquals(getUniqueCharCount("b"), 1);
 });
-
-export {};
