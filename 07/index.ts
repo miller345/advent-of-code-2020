@@ -58,11 +58,25 @@ const findAllBagsThatContain = (
     : [...new Set(colors)];
 };
 
+export const getBagContentCount = (
+  bagDefs: BagDefMap,
+  bags: { qty: number; color: string }[]
+): number => {
+  if (bags.length === 0) return 0;
+  return bags
+    .map(
+      (bag) =>
+        bag.qty +
+        bag.qty * getBagContentCount(bagDefs, bagDefs[bag.color].contains)
+    )
+    .reduce((t, a) => t + a, 0);
+};
+
 const solve: AOCSolver = (input) => {
   const bagMap = parse(input);
   const bags = Object.values(bagMap);
   const part1 = findAllBagsThatContain(bags, ["shiny gold"]).length - 1;
-  const part2 = 0;
+  const part2 = getBagContentCount(bagMap, bagMap["shiny gold"].contains);
   return { part1, part2 };
 };
 
