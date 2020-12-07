@@ -1,4 +1,4 @@
-import { AOCSolver, getExample, getInput } from "../aoc.ts";
+import { AOCSolver } from "../aoc.ts";
 
 interface BagDef {
   color: string;
@@ -18,7 +18,7 @@ const parse = (input: string): BagDefMap => {
     let color = [...line.matchAll(/(?<bag>[\w| ]+) bags contain/g)].map(
       (x) => x.groups?.bag
     )[0];
-    if (!color) throw new Error("no top color");
+    if (!color) throw new Error("no color");
     let contains: { qty: number; color: string }[] = [];
     if (!line.includes("no other bags")) {
       contains = [...line.matchAll(/(?<qty>\d+) (?<color>[\w| ]+) bag/g)].map(
@@ -42,36 +42,28 @@ const findBagsThatContain = (bags: BagDef[], color: string) =>
     [] as string[]
   );
 
+const findAllBagsThatContain = (
+  bags: BagDef[],
+  colors: string[],
+  checked: string[] = []
+): string[] => {
+  let unChecked = colors.filter((c) => !checked.includes(c));
+  let containers = unChecked.map((c) => findBagsThatContain(bags, c)).flat();
+  return unChecked.length
+    ? findAllBagsThatContain(
+        bags,
+        [...colors, ...containers],
+        [...checked, ...colors]
+      )
+    : [...new Set(colors)];
+};
+
 const solve: AOCSolver = (input) => {
-  let bags = parse(input);
-  console.log(bags);
-  let goldenContainers = findBagsThatContain(Object.values(bags), "shiny gold");
-  // console.log(goldenContainers);
-  const findAll = (
-    bags: BagDef[],
-    colors: string[],
-    checked: string[] = []
-  ): string[] => {
-    let unChecked = colors.filter((c) => !checked.includes(c));
-    if (unChecked.length) {
-      let containers = unChecked
-        .map((c) => findBagsThatContain(bags, c))
-        .flat();
-      console.log(containers);
-      return findAll(bags, [...colors, ...containers], [...checked, ...colors]);
-    }
-    return colors;
-    // return containers.length > 0 ? findAll(bags, containers) : containers;
-  };
-  console.log(
-    new Set([...findAll(Object.values(bags), ["shiny gold"])]).size - 1
-  );
-  const part1 = 0;
+  const bagMap = parse(input);
+  const bags = Object.values(bagMap);
+  const part1 = findAllBagsThatContain(bags, ["shiny gold"]).length - 1;
   const part2 = 0;
   return { part1, part2 };
 };
-
-console.log(solve(await getExample(7)));
-console.log(solve(await getInput(7)));
 
 export default solve;
