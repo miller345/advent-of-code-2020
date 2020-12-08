@@ -7,6 +7,7 @@ import day4 from "./04/index.ts";
 import day5 from "./05/index.ts";
 import day6 from "./06/index.ts";
 import day7 from "./07/index.ts";
+import day8 from "./08/index.ts";
 
 const testDay = (
   day: number,
@@ -37,6 +38,7 @@ const tests: [number, AOCSolver, AOCResult, AOCResult?][] = [
   [5, day5, { part1: 838, part2: 714 }],
   [6, day6, { part1: 6549, part2: 3466 }, { part1: 11, part2: 6 }],
   [7, day7, { part1: 337, part2: 50100 }, { part1: 4, part2: 32 }],
+  [8, day8, { part1: 1586, part2: 0 }, { part1: 5, part2: 0 }],
 ];
 
 tests.forEach((x) => testDay(...x));
