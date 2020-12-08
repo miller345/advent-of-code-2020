@@ -38,7 +38,7 @@ const tests: [number, AOCSolver, AOCResult, AOCResult?][] = [
   [5, day5, { part1: 838, part2: 714 }],
   [6, day6, { part1: 6549, part2: 3466 }, { part1: 11, part2: 6 }],
   [7, day7, { part1: 337, part2: 50100 }, { part1: 4, part2: 32 }],
-  [8, day8, { part1: 1586, part2: 0 }, { part1: 5, part2: 0 }],
+  [8, day8, { part1: 1586, part2: 703 }, { part1: 5, part2: 8 }],
 ];
 
 tests.forEach((x) => testDay(...x));
