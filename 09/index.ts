@@ -33,13 +33,22 @@ const findFirstInvalidValue = (
   return numbers[validArr.findIndex((v) => v === false)];
 };
 
+const findContiguousSet = (targetSum: number, numbers: number[]) => {
+  const allRanges = getIndexCombos(numbers.length).map(([a, b]) =>
+    numbers.slice(a, b + 1)
+  );
+  return allRanges.find((x) => x.reduce((t, x) => t + x, 0) === targetSum);
+};
+
 const solve: AOCSolver = (
   input,
   { preambleLength }: { preambleLength: number }
 ) => {
   const numbers = parse(input);
   const part1 = findFirstInvalidValue(numbers, preambleLength);
-  const part2 = 0;
+  const contiguousSet = findContiguousSet(part1, numbers);
+  if (contiguousSet == null) throw new Error("no match");
+  const part2 = Math.min(...contiguousSet) + Math.max(...contiguousSet);
   return { part1, part2 };
 };
 

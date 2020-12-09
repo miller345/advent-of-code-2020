@@ -29,64 +29,55 @@ import day9 from "./09/index.ts";
 const testDay = (
   day: number,
   solver: AOCSolver,
-  result: AOCResult,
-  exampleResult?: AOCResult
+  input: [AOCResult, any?],
+  example?: [AOCResult, any?]
 ) => {
-  if (exampleResult) {
+  if (example) {
     Deno.test(`Day ${day} (example)`, async () => {
-      assertEquals(solver(await getExample(day)), exampleResult);
+      assertEquals(solver(await getExample(day), example[1]), example[0]);
     });
   }
   Deno.test(`Day ${day}`, async () => {
-    assertEquals(solver(await getInput(day)), result);
+    assertEquals(solver(await getInput(day), input[1]), input[0]);
   });
 };
 
-const tests: [number, AOCSolver, AOCResult, AOCResult?][] = [
+const tests: [number, AOCSolver, [AOCResult, any?], [AOCResult, any?]?][] = [
   [
     1,
     day1,
-    { part1: 73371, part2: 127642310 },
-    { part1: 514579, part2: 241861950 },
+    [{ part1: 73371, part2: 127642310 }],
+    [{ part1: 514579, part2: 241861950 }],
   ],
-  [2, day2, { part1: 569, part2: 346 }, { part1: 2, part2: 1 }],
-  [3, day3, { part1: 225, part2: 1115775000 }, { part1: 7, part2: 336 }],
-  [4, day4, { part1: 202, part2: 137 }],
-  [5, day5, { part1: 838, part2: 714 }],
-  [6, day6, { part1: 6549, part2: 3466 }, { part1: 11, part2: 6 }],
-  [7, day7, { part1: 337, part2: 50100 }, { part1: 4, part2: 32 }],
-  [8, day8, { part1: 1586, part2: 703 }, { part1: 5, part2: 8 }],
-  // [9, day9, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
-  // [10, day10, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
-  // [11, day11, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
-  // [12, day12, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
-  // [13, day13, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
-  // [14, day14, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
-  // [15, day15, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
-  // [16, day16, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
-  // [17, day17, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
-  // [18, day18, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
-  // [19, day19, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
-  // [20, day20, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
-  // [21, day21, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
-  // [22, day22, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
-  // [23, day23, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
-  // [24, day24, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
-  // [25, day25, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
+  [2, day2, [{ part1: 569, part2: 346 }], [{ part1: 2, part2: 1 }]],
+  [3, day3, [{ part1: 225, part2: 1115775000 }], [{ part1: 7, part2: 336 }]],
+  [4, day4, [{ part1: 202, part2: 137 }]],
+  [5, day5, [{ part1: 838, part2: 714 }]],
+  [6, day6, [{ part1: 6549, part2: 3466 }], [{ part1: 11, part2: 6 }]],
+  [7, day7, [{ part1: 337, part2: 50100 }], [{ part1: 4, part2: 32 }]],
+  [8, day8, [{ part1: 1586, part2: 703 }], [{ part1: 5, part2: 8 }]],
+  [
+    9,
+    day9,
+    [{ part1: 776203571, part2: 104800569 }, { preambleLength: 25 }],
+    [{ part1: 127, part2: 62 }, { preambleLength: 5 }],
+  ],
+  // [10, day10, [{ part1: 0, part2: 0 }], [{ part1: 0, part2: 0 }]],
+  // [11, day11, [{ part1: 0, part2: 0 }], [{ part1: 0, part2: 0 }]],
+  // [12, day12, [{ part1: 0, part2: 0 }], [{ part1: 0, part2: 0 }]],
+  // [13, day13, [{ part1: 0, part2: 0 }], [{ part1: 0, part2: 0 }]],
+  // [14, day14, [{ part1: 0, part2: 0 }], [{ part1: 0, part2: 0 }]],
+  // [15, day15, [{ part1: 0, part2: 0 }], [{ part1: 0, part2: 0 }]],
+  // [16, day16, [{ part1: 0, part2: 0 }], [{ part1: 0, part2: 0 }]],
+  // [17, day17, [{ part1: 0, part2: 0 }], [{ part1: 0, part2: 0 }]],
+  // [18, day18, [{ part1: 0, part2: 0 }], [{ part1: 0, part2: 0 }]],
+  // [19, day19, [{ part1: 0, part2: 0 }], [{ part1: 0, part2: 0 }]],
+  // [20, day20, [{ part1: 0, part2: 0 }], [{ part1: 0, part2: 0 }]],
+  // [21, day21, [{ part1: 0, part2: 0 }], [{ part1: 0, part2: 0 }]],
+  // [22, day22, [{ part1: 0, part2: 0 }], [{ part1: 0, part2: 0 }]],
+  // [23, day23, [{ part1: 0, part2: 0 }], [{ part1: 0, part2: 0 }]],
+  // [24, day24, [{ part1: 0, part2: 0 }], [{ part1: 0, part2: 0 }]],
+  // [25, day25, [{ part1: 0, part2: 0 }], [{ part1: 0, part2: 0 }]],
 ];
 
 tests.forEach((x) => testDay(...x));
-
-Deno.test(`Day 9 (example)`, async () => {
-  assertEquals(day9(await getExample(9), { preambleLength: 5 }), {
-    part1: 127,
-    part2: 0,
-  });
-});
-
-Deno.test(`Day 9`, async () => {
-  assertEquals(day9(await getInput(9), { preambleLength: 25 }), {
-    part1: 776203571,
-    part2: 0,
-  });
-});
