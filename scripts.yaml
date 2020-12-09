@@ -1,6 +1,6 @@
 scripts:
-  start: deno run --allow-read ./08/index.ts
+  start: deno run --allow-read ./09/index.ts
   test: deno test --allow-read ./tests.ts
-  test-day: deno test --allow-read ./tests.ts --filter "/Day 8/"
+  test-day: deno test --allow-read ./tests.ts --filter "/Day 9/"
   test-examples: deno test --allow-read ./tests.ts --filter "/(example)/"
   format: deno fmt

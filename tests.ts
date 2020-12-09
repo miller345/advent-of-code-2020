@@ -8,6 +8,23 @@ import day5 from "./05/index.ts";
 import day6 from "./06/index.ts";
 import day7 from "./07/index.ts";
 import day8 from "./08/index.ts";
+import day9 from "./09/index.ts";
+// import day10 from "./10/index.ts";
+// import day11 from "./11/index.ts";
+// import day12 from "./12/index.ts";
+// import day13 from "./13/index.ts";
+// import day14 from "./14/index.ts";
+// import day15 from "./15/index.ts";
+// import day16 from "./16/index.ts";
+// import day17 from "./17/index.ts";
+// import day18 from "./18/index.ts";
+// import day19 from "./19/index.ts";
+// import day20 from "./20/index.ts";
+// import day21 from "./21/index.ts";
+// import day22 from "./22/index.ts";
+// import day23 from "./23/index.ts";
+// import day24 from "./24/index.ts";
+// import day25 from "./25/index.ts";
 
 const testDay = (
   day: number,
@@ -39,6 +56,37 @@ const tests: [number, AOCSolver, AOCResult, AOCResult?][] = [
   [6, day6, { part1: 6549, part2: 3466 }, { part1: 11, part2: 6 }],
   [7, day7, { part1: 337, part2: 50100 }, { part1: 4, part2: 32 }],
   [8, day8, { part1: 1586, part2: 703 }, { part1: 5, part2: 8 }],
+  // [9, day9, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
+  // [10, day10, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
+  // [11, day11, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
+  // [12, day12, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
+  // [13, day13, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
+  // [14, day14, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
+  // [15, day15, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
+  // [16, day16, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
+  // [17, day17, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
+  // [18, day18, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
+  // [19, day19, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
+  // [20, day20, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
+  // [21, day21, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
+  // [22, day22, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
+  // [23, day23, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
+  // [24, day24, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
+  // [25, day25, { part1: 0, part2: 0 }, { part1: 0, part2: 0 }],
 ];
 
 tests.forEach((x) => testDay(...x));
+
+Deno.test(`Day 9 (example)`, async () => {
+  assertEquals(day9(await getExample(9), { preambleLength: 5 }), {
+    part1: 127,
+    part2: 0,
+  });
+});
+
+Deno.test(`Day 9`, async () => {
+  assertEquals(day9(await getInput(9), { preambleLength: 25 }), {
+    part1: 776203571,
+    part2: 0,
+  });
+});
